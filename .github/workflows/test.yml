@@ -13,6 +13,9 @@ jobs:
             - uses: php-actions/composer@v6
               with:
                 php_version: '8.2'
+            - run: |
+                nohup php -S 127.0.0.1:8000 > /dev/null 2>&1 &
+                sleep 3
             - uses: php-actions/phpunit@v3
               with:
                 php_version: '8.2'
