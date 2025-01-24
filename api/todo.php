@@ -23,8 +23,8 @@ switch ($action) {
     $id = $_GET['id'] ?? 0;
     $stmt = $db->prepare("DELETE FROM todos WHERE id = :id");
     $stmt->execute([':id' => $id]);
-    echo json_encode(['status' => 'success?']);
-    #echo json_encode(['status' => 'success']);
+    #echo json_encode(['status' => 'success?']);
+    echo json_encode(['status' => 'success']);
     break;
   default:
     echo json_encode(['error' => 'Invalid action']);
