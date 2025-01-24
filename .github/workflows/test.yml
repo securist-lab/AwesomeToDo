@@ -10,11 +10,11 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4
-            - uses: actions/composer@v6
+            - uses: php-actions/composer@v6
               with:
                 php_version: '8.1'
-                install_flags: '--no-progress --prefer-dist'
-            - uses: actions/phpunit@v3
+            - uses: php-actions/phpunit@v3
               with:
                 php_version: '8.1'
-                path: './tests/ToDoApiTest.php'
+                args: "-d date.timezone=Asia/Tokyo"
+                configuration: phpunit.xml
