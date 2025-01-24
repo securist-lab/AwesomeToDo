@@ -11,7 +11,7 @@ class TodoApiTest extends TestCase
     {
         $newTodo = [
             'title' => 'API Test ToDo',
-            'due_date' => '2024-12-31 23:59:59'
+            'due_date' => '2025-12-31 23:59:59'
         ];
 
         $context = stream_context_create([
