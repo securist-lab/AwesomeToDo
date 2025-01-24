@@ -9,7 +9,7 @@ jobs:
         name: PHPUnit Test
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@4
+            - uses: actions/checkout@v4
             - uses: actions/composer@v6
               with:
                 php_version: '8.1'
