@@ -1,1 +1,1 @@
-{"version":1,"defects":{"TodoApiTest::testAddTodoViaApi":5,"TodoApiTest::testFetchTodosViaApi":5,"TodoApiTest::testDeleteTodoViaApi":7},"times":{"TodoApiTest::testAddTodoViaApi":0.001,"TodoApiTest::testFetchTodosViaApi":0.002,"TodoApiTest::testDeleteTodoViaApi":0.048}}
+{"version":1,"defects":{"TodoApiTest::testAddTodoViaApi":5,"TodoApiTest::testFetchTodosViaApi":5,"TodoApiTest::testDeleteTodoViaApi":7},"times":{"TodoApiTest::testAddTodoViaApi":0.004,"TodoApiTest::testFetchTodosViaApi":0.001,"TodoApiTest::testDeleteTodoViaApi":0.015}}

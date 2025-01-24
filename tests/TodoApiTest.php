@@ -1,10 +1,8 @@
 <?php
-
+use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\TestCase;
 
-/**
-* @covers summary
-*/
+#[CoversNothing]
 class TodoApiTest extends TestCase
 {
     private $baseUrl = 'http://localhost:8000/api/todo.php';
