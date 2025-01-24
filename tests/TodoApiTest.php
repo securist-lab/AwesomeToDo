@@ -2,6 +2,9 @@
 
 use PHPUnit\Framework\TestCase;
 
+/**
+* @covers summary
+*/
 class TodoApiTest extends TestCase
 {
     private $baseUrl = 'http://localhost:8000/api/todo.php';
