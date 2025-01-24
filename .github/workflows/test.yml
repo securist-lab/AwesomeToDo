@@ -11,10 +11,10 @@ jobs:
         steps:
             - uses: actions/checkout@4
             - uses: actions/composer@v6
-            with:
+              with:
                 php_version: '8.1'
                 install_flags: '--no-progress --prefer-dist'
             - uses: actions/phpunit@v3
-            with:
+              with:
                 php_version: '8.1'
                 path: './tests/ToDoApiTest.php'
