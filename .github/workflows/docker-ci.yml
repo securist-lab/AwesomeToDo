@@ -15,3 +15,7 @@ jobs:
       run: docker build -t awesometodo:latest .
     - name: Run container
       run: docker run -d -p 8080:80 awesometodo:latest
+    - name: Run PHPUnit tests
+      run: |
+        docker-compose up -d
+        docker-compose exec backend ./vendor/bin/phpunit tests
