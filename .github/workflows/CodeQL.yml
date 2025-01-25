@@ -10,5 +10,4 @@ jobs:
       - uses: github/codeql-action/init@v2	# CodeQL初期化
         with:
           languages: javascript	# 分析対象のプログラミング言語を指定
-      - uses: github/codeql-action/analyze@v2
-		# CodeQLを使った分析を実行
+      - uses: github/codeql-action/analyze@v2  # CodeQLを使った分析を実行
