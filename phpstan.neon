@@ -2,4 +2,4 @@ parameters:
   level: max
   paths:
     - api
-  memory_limit: 512M
+      memory_limit: 512M
