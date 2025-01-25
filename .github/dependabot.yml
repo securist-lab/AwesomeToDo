@@ -1,12 +1,5 @@
 version: 2
 updates:
-  - package-ecosystem: composer
-    directory: /
-    schedule:
-      interval: daily
-    commit-message:
-      prefix: deps
-    open-pull-requests-limit: 5
   - package-ecosystem: github-actions
     directory: /
     schedule:
