@@ -1,6 +1,19 @@
 version: 2
 updates:
+  # Composer (PHPプロジェクトの依存関係)
+  - package-ecosystem: composer
+    directory: /
+    schedule:
+      interval: daily
+    commit-message:
+      prefix: deps-composer
+    open-pull-requests-limit: 5
+
+  # GitHub Actions (GitHub Actionsの依存関係)
   - package-ecosystem: github-actions
     directory: /
     schedule:
       interval: daily
+    commit-message:
+      prefix: deps-actions
+    open-pull-requests-limit: 5
