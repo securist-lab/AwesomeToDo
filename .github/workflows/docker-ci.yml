@@ -19,15 +19,12 @@ jobs:
 
     # 3. Docker Composeのセットアップ
     - name: Set up Docker Compose
-      run: |
-        docker compose up -d
+      run: docker compose up -d
 
     # 4. Composer依存関係をインストール
     - name: Install Composer dependencies
-      run: |
-        docker compose exec app composer install
+      run: docker compose exec app composer install
 
     # 5. PHPUnitテストの実行
     - name: Run PHPUnit tests
-      run: |
-        docker compose exec app ./vendor/bin/phpunit --configuration phpunit.xml
+      run: docker compose exec app ./vendor/bin/phpunit --configuration phpunit.xml
