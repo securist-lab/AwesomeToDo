@@ -25,12 +25,13 @@ jobs:
     - name: Install Composer dependencies
       run: docker compose exec app composer install
 
-    # 5. PHPUnitテストの実行
-    - name: Run PHPUnit tests
-      run: docker compose exec app ./vendor/bin/phpunit --configuration phpunit.xml
-
     - name: nginx log check
       run: docker compose exec nginx tail -f /var/log/nginx/error.log
     - name: php log check
       run: docker compose exec app tail -f /var/log/php_errors.log
+
+
+    # 5. PHPUnitテストの実行
+    - name: Run PHPUnit tests
+      run: docker compose exec app ./vendor/bin/phpunit --configuration phpunit.xml
 
