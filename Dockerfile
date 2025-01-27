@@ -12,10 +12,13 @@ RUN apt-get update \
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # プロジェクトファイルをコンテナにコピー
-COPY . .
+COPY ./src/composer.json ./src/composer.lock ./
 
 # Composerの依存関係インストール
-RUN composer install
+RUN composer install --no-dev --optimize-autoloader
 
-# デフォルトのコマンド
-CMD ["php", "-S", "0.0.0.0:8000"]
+# アプリケーションソースコードのコピー
+COPY ./src .
+
+# PHP-FPMを起動する
+CMD ["php-fpm"]
