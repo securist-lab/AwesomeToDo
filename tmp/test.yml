@@ -13,7 +13,4 @@ jobs:
             - uses: php-actions/composer@v6
               with:
                 php_version: '8.4.3'
-            - run: |
-                nohup php -S 127.0.0.1:8000 > /dev/null 2>&1 &
-                sleep 3
             - run: ./vendor/bin/phpunit --test-suffix=./tests/TodoTest.php
