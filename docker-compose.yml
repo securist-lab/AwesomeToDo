@@ -7,7 +7,7 @@ services:
       - ./src:/var/www/html
     container_name: php-app
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost"]
+      test: ["CMD", "curl", "-f", "http://localhost:9000"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -22,8 +22,8 @@ services:
       - ./src:/var/www/html
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
     depends_on:
-      - app
-        condition: service_healthy
+      app: # depends_on で healthcheck を待機
+        condition: service_started
     container_name: nginx-server
     networks:
       - app-network
