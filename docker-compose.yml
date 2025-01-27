@@ -6,7 +6,8 @@ services:
     volumes:
       - ./src:/var/www/html
     container_name: php-app
-    network_mode: bridge
+    networks:
+      - app-network
 
   nginx:
     image: nginx:latest
@@ -18,4 +19,9 @@ services:
     depends_on:
       - app
     container_name: nginx-server
-    network_mode: bridge
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
