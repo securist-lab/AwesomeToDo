@@ -22,11 +22,14 @@ class TodoApiTest extends TestCase
             ]
         ]);
 
-        $response = file_get_contents($this->baseUrl . '?action=add', false, $context);
-        $this->assertNotFalse($response, 'API call failed');
-
+        $response = @file_get_contents($this->baseUrl . '?action=add', false, $context);
+        if ($response === false) {
+            $error = error_get_last();
+            $this->fail('API call failed: ' . $error['message']);
+        }
         $responseData = json_decode($response, true);
         $this->assertEquals('success', $responseData['status']);
+
     }
 
     public function testFetchTodosViaApi()
