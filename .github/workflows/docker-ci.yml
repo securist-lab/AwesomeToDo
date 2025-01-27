@@ -9,14 +9,25 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+    # 1. ソースコードをチェックアウト
     - name: Checkout code
       uses: actions/checkout@v4
+
+    # 2. Dockerイメージのビルド
     - name: Build Docker image
       run: docker build -t awesometodo:latest .
-    - name: Run container
-      run: docker run -d -p 8080:80 awesometodo:latest
-    - name: Run PHPUnit tests
+
+    # 3. Docker Composeのセットアップ
+    - name: Set up Docker Compose
       run: |
         docker compose up -d
-        docker compose exec backend composer install
-        docker compose exec backend ./vendor/bin/phpunit --configuration phpunit.xml
+
+    # 4. Composer依存関係をインストール
+    - name: Install Composer dependencies
+      run: |
+        docker compose exec app composer install
+
+    # 5. PHPUnitテストの実行
+    - name: Run PHPUnit tests
+      run: |
+        docker compose exec app ./vendor/bin/phpunit --configuration phpunit.xml
