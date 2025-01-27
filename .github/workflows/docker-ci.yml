@@ -18,4 +18,5 @@ jobs:
     - name: Run PHPUnit tests
       run: |
         docker-compose up -d
-        docker-compose exec backend ./vendor/bin/phpunit tests
+        docker-compose exec backend composer install
+        docker-compose exec backend ./vendor/bin/phpunit --configuration phpunit.xml
