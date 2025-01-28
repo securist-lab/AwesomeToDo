@@ -28,7 +28,7 @@ jobs:
     - name: Install Ping
       run: sudo apt-get update && sudo apt-get install -y curl
     - name: exec ping
-      run: docker exec -it app ping nginx-server
+      run: docker compose exec app ping nginx-server
 
     # 5. PHPUnitテストの実行
     - name: Run PHPUnit tests
