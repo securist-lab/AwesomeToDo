@@ -27,9 +27,10 @@ jobs:
 
     - name: Install curl
       run: sudo apt-get update && sudo apt-get install -y curl
-    - name: exec curl
-      run: "curl -X POST -H \"Content-Type: application/json\" -d '{\"title\": \"Test ToDo\", \"due_date\": \"2025-12-31 23:59:59\"}' http://nginx-server/api/todo.php?action=add"
-
+    - name: Curl test
+      run: |
+        curl -X POST -H "Content-Type: application/json" -d '{\"title\": \"Test ToDo\", \"due_date\": \"2025-12-31 23:59:59\"}' http://nginx-server/api/todo.php?action=add
+    
     # 5. PHPUnitテストの実行
     - name: Run PHPUnit tests
       run: docker compose exec app ./vendor/bin/phpunit --configuration phpunit.xml
