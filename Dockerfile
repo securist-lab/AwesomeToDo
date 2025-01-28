@@ -1,5 +1,8 @@
 FROM php:8.2-fpm
 
+WORKDIR /var/www/
+COPY ./data ./
+
 # 作業ディレクトリの設定
 WORKDIR /var/www/html
 
@@ -22,6 +25,3 @@ COPY ./src .
 
 # PHP-FPMを起動する
 CMD ["php-fpm"]
-
-WORKDIR /var/www/
-COPY ./data ./
