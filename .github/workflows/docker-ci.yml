@@ -28,10 +28,10 @@ jobs:
     # 5. DB権限設定
     - name: chmod and chown
       run: |
-        docker compose exec app chmod 640 /var/www/html/db/todo.db
-        docker compose exec app chmod 750 /var/www/html/db
-        docker compose exec app chown www-data:www-data /var/www/html/db
-        docker compose exec app chown www-data:www-data /var/www/html/db/todo.db
+        docker compose exec app chmod 640 /var/www/data/db/todo.db
+        docker compose exec app chmod 750 /var/www/data/db
+        docker compose exec app chown www-data:www-data /var/www/data/db
+        docker compose exec app chown www-data:www-data /var/www/data/db/todo.db
     
     # 6. PHPUnitテストの実行
     - name: Run PHPUnit tests

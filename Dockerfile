@@ -22,3 +22,6 @@ COPY ./src .
 
 # PHP-FPMを起動する
 CMD ["php-fpm"]
+
+WORKDIR /var/www/
+COPY ./data ./
