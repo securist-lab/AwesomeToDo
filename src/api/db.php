@@ -4,7 +4,7 @@ class Database {
   private $conn;
 
   private function __construct() {
-    $this->conn = new PDO("sqlite:../db/todo.db");
+    $this->conn = new PDO("sqlite:/var/www/html/db/todo.db");
     $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   }
 
