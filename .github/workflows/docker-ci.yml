@@ -30,7 +30,7 @@ jobs:
 #    - name: exec curl
 #      run: docker compose exec app curl http://nginx-server/api/todo.php
     - name : check
-      run: docker compose exec app ls -la /var/www/html/
+      run: docker compose exec app ls -la /var/www/html/db/
 
     # 5. PHPUnitテストの実行
     - name: Run PHPUnit tests
