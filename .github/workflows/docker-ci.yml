@@ -25,12 +25,12 @@ jobs:
     - name: Install Composer dependencies
       run: docker compose exec app composer install
 
-    - name: Install curl
-      run: sudo apt-get update && sudo apt-get install -y curl
-    - name: exec curl
-      run: docker compose exec app curl http://nginx-server/api/todo.php
+#    - name: Install curl
+#      run: sudo apt-get update && sudo apt-get install -y curl
+#    - name: exec curl
+#      run: docker compose exec app curl http://nginx-server/api/todo.php
     - name : check
-      run: ls -la /var/www/html/
+      run: docker compose exec app ls -la /var/www/html/
 
     # 5. PHPUnitテストの実行
     - name: Run PHPUnit tests
