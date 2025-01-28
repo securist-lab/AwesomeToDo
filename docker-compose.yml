@@ -22,7 +22,7 @@ services:
       - ./src:/var/www/html
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
     depends_on:
-      app: # depends_on で healthcheck を待機
+      app:
         condition: service_started
     container_name: nginx-server
     networks:

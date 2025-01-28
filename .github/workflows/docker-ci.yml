@@ -25,6 +25,11 @@ jobs:
     - name: Install Composer dependencies
       run: docker compose exec app composer install
 
+    - name: Install Ping
+      run: apt-get update && apt-get install -y curl
+    - name: exec ping
+      run: docker exec -it php-app ping nginx-server
+
     # 5. PHPUnitテストの実行
     - name: Run PHPUnit tests
       run: docker compose exec app ./vendor/bin/phpunit --configuration phpunit.xml
