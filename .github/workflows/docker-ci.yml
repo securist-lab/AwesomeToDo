@@ -24,18 +24,16 @@ jobs:
     # 4. Composer依存関係をインストール
     - name: Install Composer dependencies
       run: docker compose exec app composer install
-
-    - name: Install curl
-      run: sudo apt-get update && sudo apt-get install -y curl
-    - name: chmod
-      run: docker compose exec app chmod 666 /var/www/html/db/todo.db
-    - name: chmod dir
-      run: docker compose exec app chmod 777 /var/www/html/db
-    - name: Curl test
-      run: |
-        docker compose exec app curl -X POST -H "Content-Type: application/json" -d '{\"title\": \"Test ToDo\", \"due_date\": \"2025-12-31 23:59:59\"}' "http://nginx-server/api/todo.php?action=add"
     
-    # 5. PHPUnitテストの実行
+    # 5. DB権限設定
+    - name: chmod and chown
+      run: |
+        docker compose exec app chmod 640 /var/www/html/db/todo.db
+        docker compose exec app chmod 750 /var/www/html/db
+        docker compose exec app chown www-data:www-data /var/www/html/db
+        docker compose exec app chown www-data:www-data /var/www/html/db/todo.db
+    
+    # 6. PHPUnitテストの実行
     - name: Run PHPUnit tests
       run: docker compose exec app ./vendor/bin/phpunit --configuration phpunit.xml
 
