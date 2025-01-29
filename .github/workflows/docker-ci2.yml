@@ -42,8 +42,5 @@ jobs:
 
       # 6. PHPUnit テストの実行
       - name: Run PHPUnit tests
-        uses: php-actions/phpunit@v3
-        with:
-          php_version: "8.2"
-          bootstrap: vendor/autoload.php
-          configuration: phpunit.xml
+        run: docker compose exec app ./vendor/bin/phpunit --configuration phpunit.xml
+        
