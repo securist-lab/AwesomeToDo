@@ -1,0 +1,52 @@
+name: Docker
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read  # リポジトリのコードを取得できるようにする
+
+    steps:
+      # 1. リポジトリのチェックアウト
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Docker Build Action を使用してイメージをビルド
+      - name: Build Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: false
+          tags: awesometodo:latest
+
+      # 3. Docker Compose のセットアップ
+      - name: Start Docker Compose services
+        run: docker compose up -d
+
+      # 4. Composer のセットアップと依存関係のインストール
+      - name: Install Composer dependencies
+        uses: php-actions/composer@v6
+        with:
+          command: install
+          working_dir: .
+
+      # 5. DB 権限設定（コンテナ内での実行）
+      - name: Set DB permissions
+        run: |
+          docker compose exec app chmod 640 /var/www/data/db/todo.db
+          docker compose exec app chmod 750 /var/www/data/db
+          docker compose exec app chown www-data:www-data /var/www/data/db
+          docker compose exec app chown www-data:www-data /var/www/data/db/todo.db
+
+      # 6. PHPUnit テストの実行
+      - name: Run PHPUnit tests
+        uses: php-actions/phpunit@v3
+        with:
+          php_version: "8.1"
+          bootstrap: vendor/autoload.php
+          configuration: phpunit.xml
