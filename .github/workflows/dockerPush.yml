@@ -25,7 +25,7 @@ jobs:
       with:
         registry: ghcr.io
         username: ${{ github.actor }}   # ワークフローを実行している GitHub ユーザー名
-        password: ${{ secrets.GITHUB_TOKEN }}   # シークレットトークンを使用して認証（事前の払い出し不要、PakageのvisibilityをPublicにする）
+        password: ${{ secrets.GITHUB_TOKEN }}   # シークレットトークンを使用（事前の払い出し不要、PakageのvisibilityをPublicにする）
 
     # メタデータの作成
     - name: "Create metadata"
