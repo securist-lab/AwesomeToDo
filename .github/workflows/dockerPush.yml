@@ -25,14 +25,14 @@ jobs:
       with:
         registry: ghcr.io
         username: ${{ github.actor }}   # ワークフローを実行している GitHub ユーザー名
-        password: ${{ secrets.GHCR_TOKEN }}   # GitHub Actions のシークレットトークンを使用して認証
+        password: ${{ secrets.GITHUB_TOKEN }}   # GitHub Actions のシークレットトークンを使用して認証（事前の払い出し不要）
 
     # メタデータの作成
     - name: "Create metadata"
       id: meta
       uses: docker/metadata-action@v5
       with:
-        images: ghcr.io/securistant/awesometodo # コンテナイメージの保存先
+        images: ghcr.io/securistant/awesometodo # コンテナイメージの保存先（小文字）
         tags: |
           type=raw,value=latest
           type=sha,prefix=,suffix=,format=short
