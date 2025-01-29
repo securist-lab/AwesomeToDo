@@ -32,7 +32,7 @@ jobs:
       id: meta
       uses: docker/metadata-action@v5
       with:
-        images: ghcr.io/securistant/AwesomeToDo # コンテナイメージの保存先
+        images: ghcr.io/securistant/awesometodo # コンテナイメージの保存先
         tags: |
           type=raw,value=latest
           type=sha,prefix=,suffix=,format=short
@@ -45,5 +45,5 @@ jobs:
         push: true
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
-        cache-from: type=registry,ref=ghcr.io/securistant/AwesomeToDo:buildcache
-        cache-to: type=registry,ref=ghcr.io/securistant/AwesomeToDo:buildcache,mode=max
+        cache-from: type=registry,ref=ghcr.io/securistant/awesometodo:buildcache
+        cache-to: type=registry,ref=ghcr.io/securistant/awesometodo:buildcache,mode=max
