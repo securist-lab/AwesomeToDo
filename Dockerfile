@@ -2,10 +2,10 @@ FROM php:8.2-fpm
 
 WORKDIR /var/www/
 COPY ./data ./
-RUN sudo chmod 640 /var/www/db/todo.db \
-    && sudo chmod 750 /var/www/db \
-    && sudo chown www-data:www-data /var/www/db \
-    && sudo chown www-data:www-data /var/www/db/todo.db
+RUN chmod 640 /var/www/db/todo.db \
+    && chmod 750 /var/www/db \
+    && chown www-data:www-data /var/www/db \
+    && chown www-data:www-data /var/www/db/todo.db
 
 # 作業ディレクトリの設定
 WORKDIR /var/www/html
