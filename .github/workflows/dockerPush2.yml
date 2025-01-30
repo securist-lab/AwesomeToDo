@@ -34,9 +34,9 @@ jobs:
           type=raw,value=latest
           type=sha,prefix=,suffix=,format=short
 
-    # docker-compose でビルドとプッシュを実行
+    # docker compose でビルドとプッシュを実行
     - name: "Build and Push with Docker Compose"
       run: |
-        docker-compose -f docker-compose.yml build
+        docker compose -f docker-compose.yml build
         docker tag awesometodo:latest ${{ steps.meta.outputs.tags }}
         docker push ${{ steps.meta.outputs.tags }}
