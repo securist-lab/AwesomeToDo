@@ -2,6 +2,7 @@ FROM php:8.2-fpm
 
 WORKDIR /var/www/
 COPY ./data ./
+RUN ls -la
 RUN chmod 640 /var/www/data/db/todo.db \
     && chmod 750 /var/www/data/db \
     && chown www-data:www-data /var/www/data/db \
