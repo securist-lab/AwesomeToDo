@@ -3,6 +3,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    image: ghcr.io/securistant/awesometodo:latest
     volumes:
       - ./src:/var/www/html
       - ./data:/var/www/data

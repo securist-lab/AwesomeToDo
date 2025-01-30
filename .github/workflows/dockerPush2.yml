@@ -33,12 +33,10 @@ jobs:
           type=sha,prefix=,suffix=,format=short
 
     - name: "Build with Docker Compose"
-      run: docker compose -f docker-compose.yml build
+      run: docker-compose -f docker-compose.yml build
 
     - name: "Check built images"
       run: docker images
 
-    - name: "Tag and Push Image"
-      run: |
-        docker tag awesometodo-app:latest ${{ steps.meta.outputs.tags }}
-        docker push ${{ steps.meta.outputs.tags }}
+    - name: "Push Image"
+      run: docker-compose -f docker-compose.yml push
