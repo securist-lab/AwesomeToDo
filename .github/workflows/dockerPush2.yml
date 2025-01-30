@@ -33,7 +33,7 @@ jobs:
           type=sha,prefix=,suffix=,format=short
 
     - name: "Build with Docker Compose"
-      run: docker-compose -f docker-compose.yml build
+      run: docker compose -f docker-compose.yml build
 
     - name: "Check built images"
       run: docker images
