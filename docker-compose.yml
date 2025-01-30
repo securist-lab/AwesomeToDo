@@ -6,7 +6,7 @@ services:
     image: ghcr.io/securistant/awesometodo:latest
     volumes:
       - ./src:/var/www/html
-      - ./data:/var/www/data
+      - ./data/db:/var/www/db
     container_name: php-app
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:9000"]
@@ -22,7 +22,7 @@ services:
       - "8000:80"
     volumes:
       - ./src:/var/www/html
-      - ./data:/var/www/data
+      - ./data/db:/var/www/db
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
     depends_on:
       app:
