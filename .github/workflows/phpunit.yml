@@ -1,0 +1,16 @@
+name: API Test
+on:
+    push:
+        branches:
+            - main
+    pull_request:
+jobs:
+    test:
+        name: PHPUnit Test
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: php-actions/composer@v6
+              with:
+                php_version: '8.2.27'
+            - run: ./vendor/bin/phpunit --test-suffix=./tests/TodoTest.php
