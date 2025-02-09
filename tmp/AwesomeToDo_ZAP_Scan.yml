@@ -38,4 +38,40 @@ jobs:
   policyDefinition:
     defaultStrength: medium
     defaultThreshold: medium
+- type: report
+  parameters:
+    template: risk-confidence-html
+    theme: original
+    reportDir: /root
+    reportFile: ZAP_Report
+    reportTitle: ZAP Scanning Report
+    reportDescription: ""
+    displayReport: false
+  risks:
+  - info
+  - low
+  - medium
+  - high
+  confidences:
+  - falsepositive
+  - low
+  - medium
+  - high
+  - confirmed
+  sections:
+  - siteRiskCounts
+  - responseBody
+  - appendix
+  - alertTypes
+  - responseHeader
+  - alertTypeCounts
+  - riskConfidenceCounts
+  - alerts
+  - aboutThisReport
+  - contents
+  - requestBody
+  - reportDescription
+  - reportParameters
+  - requestHeader
+  - summaries
 
