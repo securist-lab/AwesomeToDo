@@ -1,6 +1,6 @@
 env:
   contexts:
-  - name: 既定コンテキスト
+  - name: AwesomeToDo
     urls:
     - http://localhost:8000
     includePaths:
@@ -19,20 +19,17 @@ env:
   parameters: {}
 jobs:
 - type: passiveScan-config
-  parameters:
-    maxAlertsPerRule: 0
-    maxBodySizeInBytesToScan: 0
-- name: import HAR File
+  parameters: {}
+- name: import HAR file
   type: import
   parameters:
     type: har
-    fileName: /root/AwesomeToDo.har
+    fileName: /root/AwesomeToDo/tmp/AwesomeToDo.har
 - type: passiveScan-wait
-  parameters:
-    maxDuration: 0
+  parameters: {}
 - type: activeScan
   parameters:
-    context: 既定コンテキスト
+    context: AwesomeToDo
     user: ""
     policy: ""
     maxRuleDurationInMins: 0
@@ -41,40 +38,4 @@ jobs:
   policyDefinition:
     defaultStrength: medium
     defaultThreshold: medium
-- type: report
-  parameters:
-    template: risk-confidence-html
-    theme: original
-    reportDir: ""
-    reportFile: AwesomeToDo ZAP Report
-    reportTitle: ZAP Scanning Report
-    reportDescription: AwesomeToDo ZAP Report
-    displayReport: false
-  risks:
-  - info
-  - low
-  - medium
-  - high
-  confidences:
-  - falsepositive
-  - low
-  - medium
-  - high
-  - confirmed
-  sections:
-  - siteRiskCounts
-  - responseBody
-  - appendix
-  - alertTypes
-  - responseHeader
-  - alertTypeCounts
-  - riskConfidenceCounts
-  - alerts
-  - aboutThisReport
-  - contents
-  - requestBody
-  - reportDescription
-  - reportParameters
-  - requestHeader
-  - summaries
 
