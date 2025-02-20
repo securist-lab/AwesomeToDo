@@ -22,7 +22,7 @@ jobs:
       - name: Dependency-Check スキャン
         uses: dependency-check/Dependency-Check_Action@main
         with:
-          project: "vulnapp" # プロジェクト名
+          project: "AwesomeToDo" # プロジェクト名
           path: "." # スキャン対象のフォルダ
           format: "HTML" # 出力フォーマット
           out: "reports" # レポートの保存先
