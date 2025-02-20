@@ -45,8 +45,8 @@ jobs:
         with:
           images: ghcr.io/${{ env.REPO_LOWER }} # 生成されるDockerイメージの名前
           tags: |
-            type=raw,value=latest # 最新バージョンとして "latest" を追加
-            type=sha,prefix=,suffix=,format=short # コミットSHAをタグとして使用
+            type=raw,value=latest
+            type=sha,prefix=,suffix=,format=short
 
       # 6. Buildx Bake を使用して Docker イメージをビルドして GHCR にプッシュ
       - name: Build and Push using Buildx Bake
