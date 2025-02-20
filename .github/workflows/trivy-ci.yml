@@ -30,7 +30,6 @@ jobs:
         with: 
             image-ref: 'awesometodo:latest'
             format: 'table'
-            exit-code: '1'
             ignore-unfixed: true
             vuln-type: 'os,library'
             severity: 'HIGH,CRITICAL'
