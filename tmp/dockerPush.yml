@@ -55,5 +55,5 @@ jobs:
           files: ./docker-compose.yml # docker-compose.yml を使用してビルド
           push: true # ビルドしたイメージを GHCR にプッシュ
           set: |
-            *.tags=ghcr.io/${{ env.REPO_LOWER }}:latest # 最新版のタグを設定
-            *.tags=ghcr.io/${{ env.REPO_LOWER }}:${{ github.sha }} # コミットSHAのタグを設定
+            *.tags=ghcr.io/${{ env.REPO_LOWER }}:latest
+            *.tags=ghcr.io/${{ env.REPO_LOWER }}:${{ github.sha }} 
