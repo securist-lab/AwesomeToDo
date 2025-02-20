@@ -23,7 +23,7 @@ jobs:
         uses: dependency-check/Dependency-Check_Action@main
         with:
           project: "AwesomeToDo" # プロジェクト名
-          path: "src" # スキャン対象のフォルダ
+          path: "." # スキャン対象のフォルダ
           format: "HTML" # 出力フォーマット
           out: "reports" # レポートの保存先
           args: "--enableExperimental" # 実験的な機能を有効にする
