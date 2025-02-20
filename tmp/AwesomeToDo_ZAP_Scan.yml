@@ -1,0 +1,70 @@
+env:
+  contexts:
+  - name: AwesomeToDo
+    urls:
+    - http://localhost:8000/
+    includePaths:
+    - http://localhost:8000/.*
+    excludePaths:
+    - http://localhost:8000/favicon.ico
+    - http://localhost:8000/js/.*
+    - http://localhost:8000/style.css
+    authentication:
+      verification:
+        method: response
+        pollFrequency: 60
+        pollUnits: requests
+        pollUrl: ""
+        pollPostData: ""
+    sessionManagement:
+      method: cookie
+    technology: {}
+    structure: {}
+  parameters: {}
+jobs:
+- type: passiveScan-config
+  parameters: {}
+- name: import HAR file
+  type: import
+  parameters:
+    type: har
+    fileName: /zap/wrk/tmp/AwesomeToDo.har
+- type: passiveScan-wait
+  parameters: {}
+- type: activeScan
+  parameters:
+    context: AwesomeToDo
+    user: ""
+    policy: ""
+    maxRuleDurationInMins: 0
+    maxScanDurationInMins: 0
+    maxAlertsPerRule: 0
+  policyDefinition:
+    defaultStrength: medium
+    defaultThreshold: medium
+- type: report
+  parameters:
+    template: modern
+    theme: corporate
+    reportDir: /zap/wrk/
+    reportFile: zap_report.html
+    reportTitle: ZAP Scanning Report - AwesomeToDo
+    reportDescription: ""
+    displayReport: false
+  risks:
+  - low
+  - medium
+  - high
+  confidences:
+  - low
+  - medium
+  - high
+  - confirmed
+  sections:
+  - passingrules
+  - instancecount
+  - alertdetails
+  - alertcount
+  - params
+  - chart
+  - statistics

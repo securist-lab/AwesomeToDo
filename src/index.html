@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Awesome ToDo</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <h1>Awesome ToDo</h1>
+    <form @submit.prevent="addTodo">
+      <input type="text" v-model="newTodo.title" placeholder="ToDoの内容" required>
+      <input type="datetime-local" v-model="newTodo.due_date" required>
+      <button type="submit">登録</button>
+    </form>
+    <ul>
+      <li v-for="todo in todos" :key="todo.id" :class="{ overdue: isOverdue(todo) }">
+        <input type="checkbox" @click="completeTodo(todo.id)">
+        <div v-html="todo.title"></div>
+        <div v-html="todo.due_date"></div>
+        <!-- {{ todo.title }} - {{ todo.due_date }} -->
+      </li>
+    </ul>
+  </div>
+  <script src="js/vue.global.prod.js"></script>
+  <!-- <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script> -->
+  <script src="js/main.js"></script>
+</body>
+</html>

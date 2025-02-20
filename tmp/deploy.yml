@@ -1,0 +1,25 @@
+name: Deploy to Production Server
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: リポジトリのチェックアウト
+      uses: actions/checkout@v4
+
+    - name: SSHで本番サーバーにデプロイ
+      uses: appleboy/ssh-action@v1.2.0
+      with:
+        host: ${{ secrets.SERVER_HOST }}      # 本番サーバーのIP
+        username: ${{ secrets.SERVER_USER }}  # SSH接続するユーザー
+        key: ${{ secrets.SSH_PRIVATE_KEY }}   # 登録したSSH秘密鍵
+        script: |
+          cd /var/www                         # Webアプリのディレクトリに移動
+          git pull origin main                # 最新のコードを取得
+          sudo systemctl restart nginx        # Webサーバーをリスタート
