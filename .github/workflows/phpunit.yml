@@ -1,0 +1,28 @@
+name: API Test
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  test:
+    name: PHPUnit Test
+    runs-on: ubuntu-latest
+    steps:
+      # リポジトリをチェックアウト
+      - uses: actions/checkout@v4
+      # ローカルWebサーバーをバックグラウンドで起動
+      - run: |
+          php -S localhost:8000 -t src &
+          sleep 3
+      # Composerのセットアップと依存関係のインストール
+      - uses: php-actions/composer@v6
+        with:
+          php_version: '8.3'
+          args: '--no-progress --prefer-dist'
+      # PHPUnitの実行
+      - uses: php-actions/phpunit@v3
+        with:
+          php_version: '8.3'
+          test_suffix: './tests/TodoTest.php'
