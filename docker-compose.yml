@@ -1,0 +1,69 @@
+services:
+  app:
+    build:
+      context: .  # 現在のディレクトリの Dockerfile を使う
+      dockerfile: Dockerfile
+    image: awesometodo:latest  # コンテナのイメージ名
+    container_name: php-app  # コンテナの名前を指定
+    restart: unless-stopped  # 自動再起動（異常終了時のみ）
+    
+    # データのマウント
+    volumes:
+      - ./composer.json:/var/www/html/composer.json
+      - ./composer.lock:/var/www/html/composer.lock
+      - ./phpunit.xml:/var/www/html/phpunit.xml:ro
+      - ./tests:/var/www/html/tests:ro
+      - ./src:/var/www/html:delegated
+      - ./data/db:/var/www/data/db
+
+    # DBを書き込み可能に設定し、lsofをインストールし、php-fpmを起動
+    command:
+      - /bin/bash
+      - -c
+      - |
+        chown -R www-data:www-data /var/www/data/db
+        chmod -R 770 /var/www/data/db
+        chmod 660 /var/www/data/db/todo.db
+        apt-get update
+        apt-get install -y --no-install-recommends lsof zip unzip
+        rm -rf /var/lib/apt/lists/*
+        exec php-fpm
+
+    healthcheck:
+      test: ["CMD", "lsof", "-i:9000"]  # PHP-FPM が動作しているか確認
+      interval: 10s  # 10秒ごとにチェック
+      timeout: 5s  # タイムアウト 5秒
+      retries: 5  # 5回リトライ
+
+    networks:
+      - app-network
+
+    # リソース制限（メモリ上限 512MB）
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx-server  # コンテナの名前を指定
+    restart: unless-stopped  # 自動再起動（異常終了時のみ）
+    
+    ports:
+      - "8000:80"  # ホストの8000番をコンテナの80番にマッピング
+
+    volumes:
+      - ./src:/var/www/html:ro  # 読み取り専用
+      - ./data:/var/www/data:ro  # 読み取り専用
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro  # 読み取り専用
+
+    depends_on:
+      app:
+        condition: service_healthy  # PHP-FPMの正常動作を確認してから起動
+
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge  # シンプルなブリッジネットワークを使用

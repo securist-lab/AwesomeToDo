@@ -1,0 +1,35 @@
+name: OWASP Dependency Check
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  schedule:
+    - cron: '0 12 * * 1'  # 毎週月曜日の12:00にスキャンを実行
+
+jobs:
+  dependency-check:
+    name: Run OWASP Dependency Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: リポジトリのチェックアウト
+        uses: actions/checkout@v4
+
+      - name: Dependency-Check スキャン
+        uses: dependency-check/Dependency-Check_Action@main
+        with:
+          project: "AwesomeToDo" # プロジェクト名
+          path: "." # スキャン対象のフォルダ
+          format: "HTML" # 出力フォーマット
+          out: "reports" # レポートの保存先
+          args: "--enableExperimental" # 実験的な機能を有効にする
+
+      - name: スキャンレポートのアップロード
+        uses: actions/upload-artifact@v4
+        with:
+          name: dependency-check-report
+          path: reports

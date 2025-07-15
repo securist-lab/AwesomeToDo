@@ -1,0 +1,23 @@
+name: Docker CI
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read  # リポジトリのコードを取得できるようにする
+    steps:
+      # リポジトリのチェックアウト
+      - name: Checkout code
+        uses: actions/checkout@v4
+      # Docker Compose のセットアップ
+      - name: Start Docker Compose services
+        run: docker compose up -d
+      # Composer のセットアップと依存関係のインストール
+      - name: Install Composer dependencies
+        run: docker compose exec app composer install
+      # PHPUnit テストの実行
+      - name: Run PHPUnit tests
+        run: docker compose exec app ./vendor/bin/phpunit --configuration phpunit.xml

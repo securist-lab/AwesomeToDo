@@ -1,0 +1,99 @@
+openapi: 3.0.0
+info:
+  title: Awesome ToDo API
+  description: API for managing a simple todo list application.
+  version: 1.0.7
+servers:
+  - url: http://localhost:8000
+    description: Local development server
+paths:
+  /api/todo.php/fetch:
+    get:
+      summary: Fetch all todos
+      description: Retrieve a list of all todos, sorted by due date.
+      responses:
+        '200':
+          description: A JSON array of todos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      description: The unique ID of the todo item.
+                    title:
+                      type: string
+                      description: The title of the todo item.
+                    due_date:
+                      type: string
+                      format: date-time
+                      description: The due date and time of the todo item.
+        '500':
+          description: Server error
+  /api/todo.php/delete:
+    get:
+      summary: Delete a todo
+      description: Delete a specific todo item using a GET request.
+      parameters:
+        - name: id
+          in: query
+          required: true
+          description: The ID of the todo to delete.
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Todo item successfully deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Status of the request.
+        '400':
+          description: Bad request (missing `id`)
+        '404':
+          description: Todo item not found
+        '500':
+          description: Server error
+  /api/todo.php/add:
+    post:
+      summary: Add a new todo
+      description: Create a new todo item with a title and due date.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - title
+                - due_date
+              properties:
+                title:
+                  type: string
+                  description: The title of the todo item.
+                due_date:
+                  type: string
+                  format: date-time
+                  description: The due date and time of the todo item.
+      responses:
+        '200':
+          description: Todo item successfully created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Status of the request.
+        '400':
+          description: Bad request
+        '500':
+          description: Server error
