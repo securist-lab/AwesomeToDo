@@ -5,8 +5,8 @@ use PHPUnit\Framework\TestCase;
 #[CoversNothing]
 class TodoApiTest extends TestCase
 {
-    # private $baseUrl = 'http://nginx-server/api/todo.php';
-    private $baseUrl = 'http://localhost:8000/api/todo.php';
+    private $baseUrl = 'http://nginx-server/api/todo.php';
+    # private $baseUrl = 'http://localhost:8000/api/todo.php';
 
     public function testAddTodoViaApi()
     {
