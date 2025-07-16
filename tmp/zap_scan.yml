@@ -1,0 +1,56 @@
+env:
+  contexts:
+  - name: http://localhost:8000
+    urls:
+    - http://localhost:8000
+    includePaths:
+    - http://localhost:8000.*
+    excludePaths:
+    - http://localhost:8000/favicon.ico
+    - http://localhost:8000/js.*
+    - http://localhost:8000/style.css
+    authentication:
+      verification:
+        method: response
+        pollFrequency: 60
+        pollUnits: requests
+        pollUrl: ""
+        pollPostData: ""
+    sessionManagement:
+      method: cookie
+    technology: {}
+    structure: {}
+  parameters: {}
+jobs:
+- type: passiveScan-config
+  parameters: {}
+- type: import
+  parameters:
+    type: har
+    fileName: /zap/wrk/tmp/AwesomeToDo0716.har
+- type: passiveScan-wait
+  parameters: {}
+- type: activeScan
+  parameters:
+    context: http://localhost:8000
+    policy: Default Policy
+  policyDefinition:
+    defaultStrength: low
+    defaultThreshold: "off"
+- type: report
+  parameters:
+    template: modern
+    theme: corporate
+    reportDir: /zap/wrk/
+    reportFile: zap_report.html
+    reportTitle: ZAP Scanning Report
+  risks:
+  - low
+  - medium
+  - high
+  confidences:
+  - low
+  - medium
+  - high
+  - confirmed
+
