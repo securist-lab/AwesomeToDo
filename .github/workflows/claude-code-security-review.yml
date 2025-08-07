@@ -1,10 +1,11 @@
-name: Security Review
+name: Claude Code Security Review
 
 permissions:
   pull-requests: write  # Needed for leaving PR comments
   contents: read
 
 on:
+  push:
   pull_request:
 
 jobs:
